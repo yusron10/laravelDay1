@@ -14,21 +14,21 @@ class StudentSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $data = [
-        	['name' => 'Eko', 'gender' => 'Laki-Laki', 'nis' => '001239', 'class_id' => 2],
-        	['name' => 'Budi', 'gender' => 'Laki-Laki', 'nis' => '001238', 'class_id' => 1],
-        	['name' => 'Ayu', 'gender' => 'Perempuan', 'nis' => '001234', 'class_id' => 2],
-        ];
+//     {
+//         $data = [
+//         	['name' => 'Eko', 'gender' => 'Laki-Laki', 'nis' => '001239', 'class_id' => 2],
+//         	['name' => 'Budi', 'gender' => 'Laki-Laki', 'nis' => '001238', 'class_id' => 1],
+//         	['name' => 'Ayu', 'gender' => 'Perempuan', 'nis' => '001234', 'class_id' => 2],
+//         ];
 
 
-        foreach ($data as $d) {
-        	Student::insert([
-        		'name' => $d['name'],
-        		'gender' => $d['gender'],
-        		'nis' =>$d['nis'],
-        		'class_id' => $d['class_id']
-        	]);
-        }
-    }
-}
+//         foreach ($data as $d) {
+//         	Student::insert([
+//         		'name' => $d['name'],
+//         		'gender' => $d['gender'],
+//         		'nis' =>$d['nis'],
+//         		'class_id' => $d['class_id']
+//         	]);
+//         }
+//     }
+ }

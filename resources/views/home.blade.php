@@ -41,19 +41,4 @@
 
 		{{ $i }}<br>
 		@endfor -->
-
-		<table class="table">
-			<tr>
-				<td>No</td>
-				<th>Nama</th>
-			</tr>
-			@foreach ($buah as $b)
-			<tr>
-				<td>{{ $loop->iteration }}</td> <!-- iteration untuk mengurutkan angka 1 sampai data terakhir -->
-				<td>{{ $b }}</td>
-				
-			</tr>
-			@endforeach
-		</table>
-
 		@endsection

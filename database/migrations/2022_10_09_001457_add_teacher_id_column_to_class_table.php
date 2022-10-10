@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->unsignedBigInteger('class_id')->after('nis');
-            $table->foreign('class_id')->references('id')->on('class')->onDelete('restrict');
+        Schema::table('class', function (Blueprint $table) {
+            $table->unsignedBigInteger('teacher_id')->after('name')->nullable();
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('restrict');
         });
     }
 
@@ -26,9 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->dropForeign(['class_id']);
-            $table->dropColumn('class_id');
+        Schema::table('class', function (Blueprint $table) {
+            $table->dropForeign(['teacher_id']);
+            $table->dropColumn('teacher_id');
         });
     }
 };

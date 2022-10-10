@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('class', function (Blueprint $table) {
-            $table->string('name')->unique();
+        Schema::create('ekstrakurikulers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('class', function (Blueprint $table) {
-            $table->dropUnique('class_name_unique');
-        });
+        Schema::dropIfExists('ekstrakurikulers');
     }
 };
