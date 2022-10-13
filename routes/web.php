@@ -22,7 +22,8 @@ use App\Http\Controllers\EkstrakurikulerController;
 
 Route::get('/', function () {
 	return view('home');
-});
+})->middleware('auth');
+
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 
 Route::post('/login', [AuthController::class, 'autentikasi']);
@@ -31,9 +32,9 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::get('/students', [StudentController::class, 'index'])->middleware('auth');
 
-Route::get('/student/{id}', [StudentController::class, 'show'])->middleware('auth');
+Route::get('/student/{id}', [StudentController::class, 'show'])->middleware(['auth', 'admin-or-teacher']);
 
-Route::get('/student-add', [StudentController::class, 'create'])->middleware('auth');
+Route::get('/student-add', [StudentController::class, 'create'])->middleware(['auth', 'admin-or-teacher']);
 
 Route::post('/student', [StudentController::class, 'store'])->middleware('auth');
 
@@ -41,8 +42,8 @@ Route::get('/student-edit/{id}', [StudentController::class, 'edit'])->middleware
 
 Route::put('/student/{id}', [StudentController::class, 'update'])->middleware('auth');
 
-Route::get('/student-delete/{id}', [StudentController::class, 'delete'])->middleware('auth');
-Route::delete('/student-destroy/{id}', [StudentController::class, 'destroy'])->middleware('auth');
+Route::get('/student-delete/{id}', [StudentController::class, 'delete'])->middleware(['auth', 'admin']);
+Route::delete('/student-destroy/{id}', [StudentController::class, 'destroy'])->middleware(['auth', 'admin']);
 
 
 
@@ -57,5 +58,5 @@ Route::get('/ekstrakurikuler-detail/{id}', [EkstrakurikulerController::class, 's
 Route::get('teacher', [TeacherController::class, 'index'])->middleware('auth');
 Route::get('teacher-detail/{id}', [TeacherController::class, 'show'])->middleware('auth');
 
-Route::get('/student-deleted', [StudentController::class, 'deletedStudent'])->middleware('auth');
-Route::get('/student/{id}/restore', [StudentController::class, 'restore'])->middleware('auth');
+Route::get('/student-deleted', [StudentController::class, 'deletedStudent'])->middleware(['auth', 'admin']);
+Route::get('/student/{id}/restore', [StudentController::class, 'restore'])->middleware(['auth', 'admin']);

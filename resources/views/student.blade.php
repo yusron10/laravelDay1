@@ -44,7 +44,12 @@
 			<td>{{ $c->gender }}</td>
 			<td>{{ $c->nis }}</td>
 			<td>{{ $c->class->name }}</td>
-			<td><a href="/student/{{$c->id}}" class="text-decoration-none">Detail</a> 
+			<td>
+				@if (Auth::user()->role_id != 1 && Auth::user()->role_id != 2)
+					
+				@else
+			<a href="/student/{{$c->id}}" class="text-decoration-none">Detail</a> 
+			@endif
 			<a href="/student-edit/{{ $c->id }}" class="text-decoration-none">Edit</a>
 			<a href="student-delete/{{ $c->id }}" class="text-decoration-none">Delete</a>
 			</td>

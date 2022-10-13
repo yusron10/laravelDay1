@@ -14,6 +14,7 @@
         padding: 20px;
         box-sizing: border-box;
         box-shadow: 5px 8px;
+        border-radius: 25px;
 
     }
 </style>
@@ -26,6 +27,7 @@
         </div>
             
         @endif
+        <p class="text-center">Login di sini ya Biar jodoh mu Ikut Login</p>
         <div class="login-box">
             <form action="" method="POST">
                 @csrf
