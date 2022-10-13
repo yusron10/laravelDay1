@@ -11,9 +11,17 @@ use App\Http\Requests\StudentCreateRequest;
 
 class StudentController extends Controller
 {
-	public function index() 
+	public function index(Request $request) 
 	{
-    	$student = Student::get();
+        $keyword = $request->keyword;
+    	$student = Student::with('class')
+                ->where('name', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('gender', $keyword)
+                // untuk mencari berdasarkan relasi
+                ->orWhereHas('class', function($query) use($keyword) {
+                    $query->where('name', $keyword);
+                })
+                ->paginate(5);
     	return view('student', ['studentlist' => $student ]);
 
         // $n = [9,8,7,6,5,10,13,16];
@@ -83,6 +91,19 @@ class StudentController extends Controller
         // $student->class_id = $request->class_id;
         // $student->save();
 
+        $newName = '';
+
+        if($request->file('photo')){
+
+        $extension = $request->file('photo')->getClientOriginalExtension();
+
+        $newName = $request->name.'-'.now()->timestamp.'.'.$extension;
+
+        $request->file('photo')->storeAs('photo', $newName);
+
+    }
+        $request['image'] = $newName;
+
         $student = Student::create($request->all());
 
         if($student) {
@@ -137,6 +158,19 @@ class StudentController extends Controller
         return redirect('/students');
 
 
+    }
+
+
+    public function deletedStudent() 
+    {
+        $delete = Student::onlyTrashed()->get();
+        return view('student-deleted-list', ['studentDelete' => $delete]);
+    }
+
+    public function restore($id)
+    {
+        $deletedStudent = Student::withTrashed()->where('id', $id)->restore();
+        return redirect('/students');
     }
 }
 

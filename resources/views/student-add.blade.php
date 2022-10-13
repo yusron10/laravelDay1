@@ -13,7 +13,7 @@
 	</ul>
 	</div>
 	@endif
-	<form action="student" method="post">
+	<form action="student" method="post" enctype="multipart/form-data">
 		@csrf
 		<div class="mb-1">
 			<label for="name">Nama</label>
@@ -38,6 +38,13 @@
 				@foreach($class as $c)
 				<option value="{{ $c->id }}">{{ $c->name }}</option>
 				@endforeach</select>
+				</div>
+
+				<div class="mb-3">
+					<label for="photo"> Photo </label>
+					<div class="input-group">
+						<input type="file" class="form-control" id="photo" name="photo">
+					</div>
 				</div>
 
 				<div class="mt-3">
